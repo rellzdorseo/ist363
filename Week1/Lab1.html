@@ -1,18 +1,80 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Jarell Dorsey</h1>
-    <p>   Something personal is that I went abroad to madrid, spain last semester, it was a great time. Something professionally , I shadowed sidearm sports for a week over the Summer. And something peculiar is that I love tacos.</p>
-    <img src="../images/me.jpg" alt="Photo of me">
-    <img src="../images/spain.jpg" alt="Spain">
-    <img src="../images/sidearm.jpg" alt="Sidearm Sports">
-    <img src="../images/taco.jpg" alt="Taco">
+    <title>Lab 1</title>
 
-    
+    <style>
+        /* Page background */
+        body {
+            background-color: #e08c4a;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Main content box */
+        .container {
+            background-color: #d9eef9;
+            width: 80%;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        /* Heading */
+        h1 {
+            text-align: center;
+            color: #0b3c8c;
+        }
+
+        /* Paragraph text */
+        p {
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Highlighted words */
+        .highlight {
+            color: orange;
+            font-weight: bold;
+        }
+
+        /* Image layout */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        /* Images */
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Jarell Dorsey</h1>
+
+        <p>
+            Something <span class="highlight">personal</span> is that I went abroad to Madrid, Spain last semester.
+            Something <span class="highlight">professionally</span> is that I shadowed Sidearm Sports for a week over the summer.
+            And something <span class="highlight">peculiar</span> is that I love tacos.
+        </p>
+
+        <div class="gallery">
+            <img src="../images/me.jpg" alt="Photo of me">
+            <img src="../images/spain.jpg" alt="Spain">
+            <img src="../images/sidearm.jpg" alt="Sidearm Sports">
+            <img src="../images/taco.jpg" alt="Taco">
+        </div>
+    </div>
 </body>
 </html>
