@@ -1,0 +1,49 @@
+/* Page background */
+body {
+    background-color: #e08c4a;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main content box */
+.container {
+    background-color: #d9eef9;
+    width: 80%;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    color: #0b3c8c;
+}
+
+/* Paragraph text */
+p {
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* Highlighted words */
+.highlight {
+    color: orange;
+    font-weight: bold;
+}
+
+/* Image layout */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+}
+
+/* Images */
+.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
