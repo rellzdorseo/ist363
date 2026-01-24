@@ -5,6 +5,12 @@ body {
     margin: 0;
     padding: 0;
 }
+h1 {
+    text-align: center;
+    color: #0b3c8c;
+
+    animation: introAnimation 3s ease-in-out forwards;
+}
 
 /* Main content box */
 .container {
@@ -46,4 +52,33 @@ p {
     width: 100%;
     height: auto;
     border-radius: 5px;
+}
+@keyframes introAnimation {
+
+    /* Start off-screen at the top */
+    0% {
+        transform: translateY(-100px) rotateY(0deg) scale(1);
+        opacity: 0;
+    }
+
+    /* Slide down into view */
+    30% {
+        transform: translateY(0) rotateY(0deg) scale(1);
+        opacity: 1;
+    }
+
+    /* Flip around */
+    60% {
+        transform: translateY(0) rotateY(360deg) scale(1);
+    }
+
+    /* Pulse larger */
+    80% {
+        transform: translateY(0) rotateY(360deg) scale(1.2);
+    }
+
+    /* End slightly smaller */
+    100% {
+        transform: translateY(0) rotateY(360deg) scale(1);
+    }
 }
