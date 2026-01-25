@@ -6,71 +6,52 @@
     <title>Lab 2</title>
 
 <style>
-   body { 
-       background-color: #e38e49; 
-       font-family: Arial, Helvetica, sans-serif;
-   }
+   body { background-color: #e38e49; 
+font-family:Arial, Helvetica, sans-serif ;
+}
+.container {
+  background-color: #d4ebf8;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 1% 10%;
+}
+h1 {
+  color:#0a3981;
+  animation: nameAnimation 3s ease-in-out forwards;
+  display: inline-block;
+}
+strong {color:#e38e49; }
+.images{
+  display: flex;
+  flex-wrap: wrap;
+}
+.images div{
+  flex: 1;
+}
+img{
+  width: 100%;
+  min-width: 250px;
+}
 
-   .container {
-       background-color: #d4ebf8;
-       padding: 20px;
-       border-radius: 10px;
-       margin: 20px;
-       padding: 1% 10%;
-   }
+/* NEW ANIMATION */
+@keyframes nameAnimation {
+  0% {
+    transform: translateY(-200px) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+  30% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(0) rotate(360deg) scale(1);
+  }
+  100% {
+    transform: translateY(0) rotate(360deg) scale(1.3);
+  }
+}
 
-   /* ===== LAB 02 CHANGE: animate h1 ===== */
-   h1{
-       color:#0a3981;
-       animation: nameIntro 3s ease-in-out forwards;
-   }
-
-   strong { color:#e38e49; }
-
-   .images{
-       display: flex;
-       flex-wrap: wrap;
-   }
-
-   .images div{
-       flex: 1;
-   }
-
-   img{
-       width: 100%;
-       min-width: 250px;
-   }
-
-   /* ===== LAB 02 CHANGE: keyframes animation ===== */
-   @keyframes nameIntro {
-
-       /* Slide down from top */
-       0% {
-           transform: translateY(-100px) rotateY(0deg) scale(1);
-           opacity: 0;
-       }
-
-       /* In place */
-       30% {
-           transform: translateY(0) rotateY(0deg) scale(1);
-           opacity: 1;
-       }
-
-       /* Flip */
-       60% {
-           transform: translateY(0) rotateY(360deg) scale(1);
-       }
-
-       /* Pulse larger */
-       80% {
-           transform: translateY(0) rotateY(360deg) scale(1.3);
-       }
-
-       /* Settle */
-       100% {
-           transform: translateY(0) rotateY(360deg) scale(1);
-       }
-   }
 </style>
 
 </head>
