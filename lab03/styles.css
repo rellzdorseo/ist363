@@ -32,7 +32,7 @@
   }
   
   nav ul li:hover {
-    color: #e2625c; /* melon-ish hover */
+    color: #e2625c; /* melon hover */
   }
   
   /* HEADER */
@@ -45,7 +45,7 @@
   
   header h1 {
     font-family: "Arial Black", sans-serif;
-    color: #e2625c; /* red text for headings like recipes & about */
+    color: #e2625c; /* melon-ish/red color for headings */
     font-size: 3rem;
   }
   
@@ -65,7 +65,7 @@
   }
   
   .recipe {
-    background-color: #ffffff; /* keep recipe card white */
+    background-color: #ffffff;
     border-radius: 10px;
     padding: 1rem;
     box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
@@ -92,12 +92,33 @@
     font-size: 1rem;
   }
   
+  /* ABOUT US SECTION */
+  .about {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem 1rem;
+    background-color: #ffffff;
+    text-align: center;
+  }
+  
+  .about h2 {
+    font-family: "Arial Black", sans-serif;
+    color: #e2625c; /* red for About Us heading */
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .about p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
   /* NEWSLETTER SECTION */
   .newsletter {
     position: relative;
     max-width: 1200px;
     margin: 2rem auto;
-    padding: 3rem 1rem; /* extra top padding to show image */
+    padding: 3rem 1rem;
     background-color: #e4fdc3; /* lime */
     border-radius: 10px;
     text-align: center;
@@ -112,7 +133,7 @@
     transform: translateX(-50%);
     width: 100%;
     height: auto;
-    opacity: 0.3; /* so text is visible over the image */
+    opacity: 0.3; /* faded behind content */
     z-index: 1;
   }
   
@@ -134,7 +155,7 @@
     padding: 0.5rem 1rem;
     border-radius: 5px;
     border: none;
-    background-color: #e2625c; /* melon-ish button */
+    background-color: #e2625c; /* melon button */
     color: white;
     cursor: pointer;
     font-weight: bold;
