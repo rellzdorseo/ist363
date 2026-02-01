@@ -1,165 +1,138 @@
-/* ---------- Imports ---------- */
+// Main SASS file
 @import 'partials/variables';
 @import 'partials/reset';
 @import 'partials/mixins';
 
-/* ---------- Base ---------- */
-:root { color-scheme: light; }
-
+// Body styling
 body {
-  font-family: $font-sans;
-  background: #fff;
-  color: #111;
+  font-family: $font-body;
+  background-color: $mint;
+  color: #333;
 }
 
-.wrapper {
-  width: min(100% - 2rem, $max-w);
-  margin-inline: auto;
-}
+// Nav styling with extend and hover animation
+nav {
+  @extend %flex-center;
+  background-color: $melon;
+  padding: 1rem;
 
-/* Links */
-a { color: $brand-accent; text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-/* ---------- Header & NAV (with transition/animation — meets c) ---------- */
-.site-header {
-  background: $brand-bg;
-  border-bottom: 3px solid $brand-muted;
-
-  .wrapper {                       /* ← NESTING example (meets d.ii) */
-    @include flex-center();
-    justify-content: space-between;
-    padding-block: $space-3;
-  }
-
-  .logo {
-    font-size: clamp(1.25rem, 2.5vw + .5rem, 1.75rem);
-    font-weight: 800;
-    color: #111;
-    span { color: $brand-accent; } /* nested */
-  }
-}
-
-.site-nav {
   ul {
-    list-style: none; display: flex; gap: $space-4; margin: 0; padding: 0;
+    display: flex;
+    list-style: none;
+
+    li {
+      margin: 0 1.5rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: color $transition-speed;
+
+      &:hover {
+        color: $orange;
+      }
+    }
   }
-  a {
-    position: relative;
-    padding: $space-2 $space-3;
-    color: #111;
-    transition: color $duration-fast $easing, background-color $duration-fast $easing; /* animation */
-  }
-  a::after {            /* animated underline bar */
-    content: "";
-    position: absolute; left: $space-3; right: $space-3; bottom: .35rem;
-    height: 2px; background: $brand-accent; transform: scaleX(0);
-    transition: transform $duration-fast $easing;
-    transform-origin: left;
-  }
-  a:hover { color: $brand-accent; background: rgba($brand-accent, .08); }
-  a:hover::after, a.is-active::after { transform: scaleX(1); }
 }
 
-/* ---------- Hero ---------- */
-.hero {
-  /* overlay + image */
-  background:
-    linear-gradient(0deg, rgba($brand-muted, .25), rgba($brand-muted, .25)),
-    url('images/recipe5.jpg') center/cover no-repeat;
-  color: #0b2a2a;
-  padding-block: clamp(3rem, 8vw, 8rem);
+// Header
+header {
+  @include container;
+  text-align: center;
+  padding: 2rem 0;
 
-  h1 { margin: 0 0 $space-2; }
-  p  { margin: 0; font-size: 1.125rem; color: #134; }
+  h1 {
+    font-family: $font-heading;
+    color: $melon;
+    font-size: 3rem;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+  }
 }
 
-/* ---------- Buttons (mixin — meets d.iv) ---------- */
-.btn         { @include button-base($brand-muted, #063); }
-.btn--accent { @include button-base($brand-accent, #fff); }
-
-/* ---------- Card placeholder (extend — meets d.iv) ---------- */
-%card {
-  background: #fff;
-  border-radius: $radius;
-  box-shadow: $shadow-1;
-  overflow: hidden;
-}
-
-/* ---------- Recipes Grid & Cards ---------- */
+// Recipes section
 .recipes {
+  @include container;
   display: grid;
-  gap: $space-4;
-  margin-block: $space-5;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
 
-  @include respond(md) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  @include respond(lg) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
+  .recipe {
+    @include recipe-card;
 
-.recipe-card {
-  @extend %card;                    /* ← EXTEND */
-  display: grid;
-  grid-template-columns: 1fr;
+    img {
+      width: 100%;
+      border-radius: 10px;
+    }
 
-  img { width: 100%; height: auto; display: block; }
+    h2 {
+      font-family: $font-heading;
+      margin: 0.5rem 0;
+      font-size: 1.5rem;
+    }
 
-  &__body   { padding: $space-4; }
-  &__title  { margin: 0 0 $space-2; color: $brand-accent; }
-  &__excerpt{ margin: 0 0 $space-3; color: #333; }
-
-  @include respond(md) {
-    grid-template-columns: 2fr 3fr; /* image | copy on larger screens */
-    align-items: center;
-  }
-}
-
-/* ---------- About ---------- */
-.about {
-  margin-block: $space-5;
-
-  .content {
-    display: grid;
-    gap: $space-4;
-
-    @include respond(md) {
-      grid-template-columns: 1.2fr 1fr; /* text | image */
-      align-items: center;
+    p {
+      font-size: 1rem;
     }
   }
-
-  img {
-    border-radius: $radius;
-    box-shadow: $shadow-1;
-  }
 }
 
-/* ---------- Newsletter ---------- */
+// Newsletter section
 .newsletter {
-  background: linear-gradient(0deg, rgba($brand-bg,.65), rgba($brand-bg,.65));
-  border-top: 3px solid $brand-muted;
-  border-bottom: 3px solid $brand-muted;
-  padding-block: $space-5;
+  @include container;
+  background-color: $orange;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  color: white;
+  margin-bottom: 2rem;
 
-  .wrap { @include flex-center($space-4); flex-wrap: wrap; }
+  input[type="email"] {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
+    margin-right: 0.5rem;
+  }
 
-  img { width: 80px; height: auto; }
+  button {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: $melon;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color $transition-speed;
 
-  form {
-    display: flex; gap: $space-2; flex-wrap: wrap;
-    input[type="email"] {
-      padding: $space-2 $space-3;
-      border: 2px solid $brand-muted;
-      border-radius: $radius;
-      min-width: 16rem;
+    &:hover {
+      background-color: $lime;
+      color: black;
     }
   }
 }
 
-/* ---------- Footer ---------- */
-.site-footer {
-  border-top: 3px solid $brand-muted;
-  background: #fafafa;
-  padding-block: $space-4;
+// Footer
+footer {
+  @extend %flex-center;
+  background-color: $melon;
+  padding: 1rem;
+  color: white;
+}
 
-  small { color: #444; }
+// Responsive text adjustments
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .recipes {
+    grid-template-columns: 1fr;
+  }
 }

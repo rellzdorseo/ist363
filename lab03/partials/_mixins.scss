@@ -1,23 +1,22 @@
-@import 'variables';
+// _mixins.scss
 
-/* ---------- Mixins ---------- */
-@mixin flex-center($gap: $space-3) {
-  display: flex; align-items: center; justify-content: center; gap: $gap;
-}
-
-@mixin button-base($bg, $fg: #111) {
-  display: inline-block;
-  padding: $space-2 $space-4;
-  border-radius: $radius;
-  background: $bg; color: $fg;
-  text-decoration: none; font-weight: 600;
-  transition: transform $duration-fast $easing, filter $duration-fast $easing;
-  &:hover { transform: translateY(-1px); filter: brightness(1.05); }
-  &:active { transform: translateY(0); filter: brightness(.98); }
-}
-
-/* Mobile-first breakpoints */
-@mixin respond($bp) {
-  @if $bp == md { @media (min-width: 48rem) { @content; } }  /* ~768px */
-  @if $bp == lg { @media (min-width: 64rem) { @content; } }  /* ~1024px */
-}
+// Reusable recipe card style
+@mixin recipe-card {
+    background-color: $lime;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    transition: transform $transition-speed ease;
+  
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  // Reusable responsive container
+  @mixin container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
