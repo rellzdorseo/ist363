@@ -1,0 +1,165 @@
+/* ---------- Imports ---------- */
+@import 'partials/variables';
+@import 'partials/reset';
+@import 'partials/mixins';
+
+/* ---------- Base ---------- */
+:root { color-scheme: light; }
+
+body {
+  font-family: $font-sans;
+  background: #fff;
+  color: #111;
+}
+
+.wrapper {
+  width: min(100% - 2rem, $max-w);
+  margin-inline: auto;
+}
+
+/* Links */
+a { color: $brand-accent; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- Header & NAV (with transition/animation — meets c) ---------- */
+.site-header {
+  background: $brand-bg;
+  border-bottom: 3px solid $brand-muted;
+
+  .wrapper {                       /* ← NESTING example (meets d.ii) */
+    @include flex-center();
+    justify-content: space-between;
+    padding-block: $space-3;
+  }
+
+  .logo {
+    font-size: clamp(1.25rem, 2.5vw + .5rem, 1.75rem);
+    font-weight: 800;
+    color: #111;
+    span { color: $brand-accent; } /* nested */
+  }
+}
+
+.site-nav {
+  ul {
+    list-style: none; display: flex; gap: $space-4; margin: 0; padding: 0;
+  }
+  a {
+    position: relative;
+    padding: $space-2 $space-3;
+    color: #111;
+    transition: color $duration-fast $easing, background-color $duration-fast $easing; /* animation */
+  }
+  a::after {            /* animated underline bar */
+    content: "";
+    position: absolute; left: $space-3; right: $space-3; bottom: .35rem;
+    height: 2px; background: $brand-accent; transform: scaleX(0);
+    transition: transform $duration-fast $easing;
+    transform-origin: left;
+  }
+  a:hover { color: $brand-accent; background: rgba($brand-accent, .08); }
+  a:hover::after, a.is-active::after { transform: scaleX(1); }
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  /* overlay + image */
+  background:
+    linear-gradient(0deg, rgba($brand-muted, .25), rgba($brand-muted, .25)),
+    url('images/recipe5.jpg') center/cover no-repeat;
+  color: #0b2a2a;
+  padding-block: clamp(3rem, 8vw, 8rem);
+
+  h1 { margin: 0 0 $space-2; }
+  p  { margin: 0; font-size: 1.125rem; color: #134; }
+}
+
+/* ---------- Buttons (mixin — meets d.iv) ---------- */
+.btn         { @include button-base($brand-muted, #063); }
+.btn--accent { @include button-base($brand-accent, #fff); }
+
+/* ---------- Card placeholder (extend — meets d.iv) ---------- */
+%card {
+  background: #fff;
+  border-radius: $radius;
+  box-shadow: $shadow-1;
+  overflow: hidden;
+}
+
+/* ---------- Recipes Grid & Cards ---------- */
+.recipes {
+  display: grid;
+  gap: $space-4;
+  margin-block: $space-5;
+
+  @include respond(md) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @include respond(lg) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.recipe-card {
+  @extend %card;                    /* ← EXTEND */
+  display: grid;
+  grid-template-columns: 1fr;
+
+  img { width: 100%; height: auto; display: block; }
+
+  &__body   { padding: $space-4; }
+  &__title  { margin: 0 0 $space-2; color: $brand-accent; }
+  &__excerpt{ margin: 0 0 $space-3; color: #333; }
+
+  @include respond(md) {
+    grid-template-columns: 2fr 3fr; /* image | copy on larger screens */
+    align-items: center;
+  }
+}
+
+/* ---------- About ---------- */
+.about {
+  margin-block: $space-5;
+
+  .content {
+    display: grid;
+    gap: $space-4;
+
+    @include respond(md) {
+      grid-template-columns: 1.2fr 1fr; /* text | image */
+      align-items: center;
+    }
+  }
+
+  img {
+    border-radius: $radius;
+    box-shadow: $shadow-1;
+  }
+}
+
+/* ---------- Newsletter ---------- */
+.newsletter {
+  background: linear-gradient(0deg, rgba($brand-bg,.65), rgba($brand-bg,.65));
+  border-top: 3px solid $brand-muted;
+  border-bottom: 3px solid $brand-muted;
+  padding-block: $space-5;
+
+  .wrap { @include flex-center($space-4); flex-wrap: wrap; }
+
+  img { width: 80px; height: auto; }
+
+  form {
+    display: flex; gap: $space-2; flex-wrap: wrap;
+    input[type="email"] {
+      padding: $space-2 $space-3;
+      border: 2px solid $brand-muted;
+      border-radius: $radius;
+      min-width: 16rem;
+    }
+  }
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 3px solid $brand-muted;
+  background: #fafafa;
+  padding-block: $space-4;
+
+  small { color: #444; }
+}

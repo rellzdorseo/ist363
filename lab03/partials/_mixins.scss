@@ -1,0 +1,23 @@
+@import 'variables';
+
+/* ---------- Mixins ---------- */
+@mixin flex-center($gap: $space-3) {
+  display: flex; align-items: center; justify-content: center; gap: $gap;
+}
+
+@mixin button-base($bg, $fg: #111) {
+  display: inline-block;
+  padding: $space-2 $space-4;
+  border-radius: $radius;
+  background: $bg; color: $fg;
+  text-decoration: none; font-weight: 600;
+  transition: transform $duration-fast $easing, filter $duration-fast $easing;
+  &:hover { transform: translateY(-1px); filter: brightness(1.05); }
+  &:active { transform: translateY(0); filter: brightness(.98); }
+}
+
+/* Mobile-first breakpoints */
+@mixin respond($bp) {
+  @if $bp == md { @media (min-width: 48rem) { @content; } }  /* ~768px */
+  @if $bp == lg { @media (min-width: 64rem) { @content; } }  /* ~1024px */
+}
