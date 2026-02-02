@@ -9,6 +9,23 @@
     background-color: #ffffff; /* white background */
     color: #333;
   }
+  /* SECTION LABELS (Latest / Older Recipes) */
+.section-label {
+    max-width: 1200px;
+    margin: 3rem auto 1rem;
+    padding: 0 1rem;
+    font-family: "Arial Black", sans-serif;
+    font-size: 2rem;
+    color: #e2625c; /* melon red */
+    text-align: center;
+  }
+  
+  /* Wrapper for recipe groups */
+  .recipes-wrapper {
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+  }
+  
   
   /* NAVIGATION BAR */
   nav {
