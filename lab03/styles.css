@@ -114,59 +114,60 @@
   }
   
   /* NEWSLETTER SECTION */
-  .newsletter {
-    position: relative;
+.newsletter {
     max-width: 1200px;
     margin: 2rem auto;
-    padding: 3rem 1rem;
+    padding: 2rem 1rem;
     background-color: #e4fdc3; /* lime */
     border-radius: 10px;
     text-align: center;
     color: #333;
-    overflow: hidden;
   }
   
+  /* Newsletter image at the top */
   .newsletter img {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    display: block;
     width: 100%;
-    height: auto;
-    opacity: 0.3; /* faded behind content */
-    z-index: 1;
+    max-height: 200px;
+    object-fit: contain; /* shows full image */
+    margin-bottom: 1rem;
   }
   
-  .newsletter h2, .newsletter p {
-    position: relative;
-    z-index: 2; /* text on top of image */
+  /* Newsletter text */
+  .newsletter h2 {
+    font-family: "Arial Black", sans-serif;
+    color: #e2625c; /* red heading */
+    margin-bottom: 0.5rem;
   }
   
+  .newsletter p {
+    margin-bottom: 1rem;
+  }
+  
+  /* Email input */
   .newsletter input[type="email"] {
     padding: 0.5rem;
     border-radius: 5px;
     border: none;
     margin-right: 0.5rem;
-    position: relative;
-    z-index: 2;
   }
   
+  /* Subscribe button */
   .newsletter button {
     padding: 0.5rem 1rem;
     border-radius: 5px;
     border: none;
-    background-color: #e2625c; /* melon button */
+    background-color: #e2625c; /* melon */
     color: white;
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s;
-    position: relative;
-    z-index: 2;
   }
   
   .newsletter button:hover {
     background-color: #e89b6a; /* orange hover */
   }
+  
   
   /* FOOTER */
   footer {
