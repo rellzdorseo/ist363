@@ -13,26 +13,34 @@
     color: #333;
   }
   
-  /* ===================== */
   /* NAVIGATION BAR */
-  /* ===================== */
-  nav {
+nav {
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* title left, menu right */
     align-items: center;
     background-color: #e89b6a; /* orange */
-    padding: 1rem;
+    padding: 1rem 2rem;
   }
   
+  /* Site title in nav */
+  nav h1 {
+    color: #ffffff;           /* white text */
+    font-family: "Arial Black", sans-serif;
+    font-size: 1.8rem;
+    margin: 0;
+  }
+  
+  /* Menu items */
   nav ul {
     display: flex;
     list-style: none;
   }
   
   nav ul li {
-    margin: 0 1.5rem;
+    margin: 0 1rem;
     cursor: pointer;
     font-weight: bold;
+    color: white;              /* menu text also white */
     transition: color 0.3s;
   }
   
