@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orange News</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 overflow-x-hidden">
+
+  <!-- HEADER -->
+  <header class="bg-indigo-900">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <h1 class="text-lg font-bold">
+        <span class="text-orange-400">Orange</span>
+        <span class="text-white">News</span>
+      </h1>
+
+      <!-- Hidden on mobile -->
+      <nav class="hidden md:block">
+        <ul class="flex space-x-6 text-white font-medium">
+          <li><a href="#" class="hover:text-yellow-400 transition">Home</a></li>
+          <li><a href="#" class="hover:text-yellow-400 transition">Latest</a></li>
+          <li><a href="#" class="hover:text-yellow-400 transition">Scores</a></li>
+          <li><a href="#" class="hover:text-yellow-400 transition">Videos</a></li>
+          <li><a href="#" class="hover:text-yellow-400 transition">More</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main class="max-w-6xl mx-auto px-4 py-6">
+    <div class="relative w-full overflow-hidden rounded-lg shadow-md">
+      <img
+        src="images/campus.jpg"
+        alt="Campus"
+        class="w-full h-64 md:h-96 object-cover"
+      >
+
+      <div class="absolute bottom-0 left-0 w-full bg-gray-800 bg-opacity-90 text-white px-6 py-4">
+        <h2 class="text-xl md:text-2xl font-bold">Will the Snow Ever Thaw?</h2>
+        <p class="text-sm md:text-base">
+          Get the latest scoop on the weather and everything that effects the jet stream.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- FEATURED STORIES -->
+  <section class="max-w-6xl mx-auto px-4 py-8">
+    <h2 class="text-2xl font-bold mb-6">More Featured Stories</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <div class="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition bg-white">
+        <img src="images/graduates.jpg" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h3 class="font-bold text-lg mb-1">Graduation 2025</h3>
+          <p class="text-sm text-gray-700">
+            Invite your friends and family to join us in May.
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition bg-white">
+        <img src="images/runners.jpg" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h3 class="font-bold text-lg mb-1">Workplace Run</h3>
+          <p class="text-sm text-gray-700">
+            Run a 5k with your colleagues.
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition bg-white">
+        <img src="images/artshow.jpg" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h3 class="font-bold text-lg mb-1">Art Show</h3>
+          <p class="text-sm text-gray-700">
+            The best art of the year on display at Schaffer.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HEADLINES + SCORES -->
+  <section class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- TOP HEADLINES -->
+      <div>
+        <h2 class="text-2xl font-bold mb-4">Top Headlines</h2>
+
+        <div class="space-y-4">
+
+          <!-- Added proper shadow -->
+          <div class="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition">
+            <h3 class="font-bold text-base">Player X Breaks Record</h3>
+            <p class="text-sm text-gray-600">
+              The record-breaking performance from Player X stunned fans everywhere...
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition">
+            <h3 class="font-bold text-base">Team Y Wins Championship</h3>
+            <p class="text-sm text-gray-600">
+              In an epic showdown, Team Y came out on top with a historic victory...
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition">
+            <h3 class="font-bold text-base">Athlete Z Announces Retirement</h3>
+            <p class="text-sm text-gray-600">
+              Athlete Z's retirement shocked the sports world...
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- GAME SCORES -->
+      <div>
+        <h2 class="text-2xl font-bold mb-4">Game Scores</h2>
+
+        <div class="bg-white rounded-lg p-6 shadow-md">
+          <div class="flex justify-between font-bold uppercase text-gray-600 border-b pb-2 mb-4">
+            <span>Game</span>
+            <span>Score</span>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex justify-between border-b pb-2">
+              <span>Women's Hockey vs Miami</span>
+              <span class="font-bold">3 – 1</span>
+            </div>
+
+            <div class="flex justify-between border-b pb-2">
+              <span>Men's Lacrosse vs St Bonaventure</span>
+              <span class="font-bold">7 – 18</span>
+            </div>
+
+            <div class="flex justify-between">
+              <span>Men's Basketball vs Duke</span>
+              <span class="font-bold">98 – 75</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="bg-gray-800 py-12 mt-12 rounded-lg max-w-6xl mx-auto px-4">
+    <div class="text-left">
+
+      <h2 class="text-2xl font-bold text-white mb-4">
+        Subscribe to Our Newsletter
+      </h2>
+
+      <p class="text-gray-300 mb-6">
+        Stay updated with the latest news, scores, and exclusive content delivered straight to your inbox!
+      </p>
+
+      <!-- Proper left-aligned input + button -->
+      <div class="flex flex-col md:flex-row gap-4 max-w-3xl">
+
+        <input
+          type="email"
+          placeholder="Enter your email"
+          class="flex-1 px-4 py-3 rounded-md text-black focus:outline-none"
+        >
+
+        <button
+          class="bg-yellow-400 text-black font-bold px-6 py-3 rounded-md hover:bg-yellow-500 transition"
+        >
+          Subscribe
+        </button>
+
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>
