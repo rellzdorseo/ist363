@@ -1,18 +1,4 @@
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-<link href="node_modules/bootstrap/dist/css/bootstrap-grid.min.css"
-rel="stylesheet"/>​
-</head>
-<body>
-    <h1 class="text-primary">Hello World</h1>
 
-<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>​
-</body>
-</html>-->
 
 
 <!DOCTYPE html>
@@ -62,30 +48,64 @@ rel="stylesheet"/>​
 
     <!-- PORTFOLIO / CAROUSEL -->
     <section id="portfolio" class="mb-5">
-      <div id="portfolioCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner rounded overflow-hidden">
-          <div class="carousel-item active">
-            <img src="images/clouds-3353159_1280.jpg" class="d-block carousel-img" alt="Portfolio slide 1">
+        <div id="portfolioCarousel" class="carousel slide" data-bs-ride="carousel">
+      
+          
+          <!-- slides -->
+          <div class="carousel-inner rounded overflow-hidden">
+      
+            <div class="carousel-item active">
+              <img src="images/blue-flower-5158746_1280.jpg" class="d-block carousel-img" alt="Blue flower">
+            </div>
+      
+            <div class="carousel-item">
+              <img src="images/mountains.jpg" class="d-block carousel-img" alt="Mountains">
+            </div>
+      
+            <div class="carousel-item">
+              <img src="images/architecture-1868667_1280.jpg" class="d-block carousel-img" alt="Architecture">
+            </div>
+      
+            <div class="carousel-item">
+              <img src="images/lake-8763490_1280.jpg" class="d-block carousel-img" alt="Lake">
+            </div>
+      
+            <div class="carousel-item">
+              <img src="images/plum-2679782_1280.jpg" class="d-block carousel-img" alt="Plum">
+            </div>
+      
+            <div class="carousel-item">
+              <img src="images/snow-7658399_1280.jpg" class="d-block carousel-img" alt="Snow">
+            </div>
+      
+            <div class="carousel-item">
+              <img src="images/clouds-3353159_1280.jpg" class="d-block carousel-img" alt="Clouds">
+            </div>
+      
+            <div class="carousel-item">
+              <img src="images/blue-eryngo-7319904_1280.jpg" class="d-block carousel-img" alt="Blue eryngo flower">
+            </div>
+      
+            <div class="carousel-item">
+              <img src="images/art-2578353_1280.jpg" class="d-block carousel-img" alt="Art">
+            </div>
+      
           </div>
-          <div class="carousel-item">
-            <img src="images/mountains.jpg" class="d-block carousel-img" alt="Portfolio slide 2">
-          </div>
-          <div class="carousel-item">
-            <img src="images/lake-8763490_1280.jpg" class="d-block carousel-img" alt="Portfolio slide 3">
-          </div>
+      
+          <!-- controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+      
+          <button class="carousel-control-next" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+      
         </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-
-        <button class="carousel-control-next" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </section>
+      </section>
+      
 
     <!-- CUSTOMER REVIEWS -->
     <section class="section-blue py-5 rounded mb-5">
@@ -194,31 +214,52 @@ rel="stylesheet"/>​
     <section id="contact" class="section-blue py-5 rounded mb-5">
       <div class="container">
         <h2 class="text-center mb-1">Get in Touch</h2>
-        <p class="text-center text-muted mb-4">Questions to ask? Fill out the form to contact me directly.</p>
-
+        <p class="text-center text-muted mb-4 contact-subtext">
+            Questions to ask? Fill out the form to contact me directly.
+          </p>
         <form class="mx-auto" style="max-width: 620px;">
-          <div class="mb-3">
-            <label class="form-label">Email address:</label>
-            <input type="email" class="form-control" placeholder="e.g. mario@example.com">
-          </div>
+            <div class="mb-3">
+                <label class="form-label">Email address:</label>
+                <div class="input-group">
+                  <span class="input-group-text icon-grey">
+                    <i class="bi bi-envelope"></i>
+                  </span>
+                  <input type="email" class="form-control" placeholder="e.g. mario@example.com">
+                  <span class="input-group-text icon-grey">
+                    <i class="bi bi-question-circle"></i>
+                  </span>
+                </div>
+              </div>
 
-          <div class="mb-3">
-            <label class="form-label">Name:</label>
-            <input type="text" class="form-control" placeholder="e.g. Mario">
-          </div>
+              <div class="mb-3">
+                <label class="form-label">Name:</label>
+                <div class="input-group">
+                  <span class="input-group-text icon-grey">
+                    <i class="bi bi-person"></i>
+                  </span>
+                  <input type="text" class="form-control" placeholder="e.g. Mario">
+                  <span class="input-group-text icon-grey">
+                    <i class="bi bi-question-circle"></i>
+                  </span>
+                </div>
+              </div>
 
+              <div class="mb-3">
+                <label class="form-label">What is your question about?</label>
+                <div class="input-group">
+                  <span class="input-group-text icon-grey">
+                    <i class="bi bi-chat-left-text"></i>
+                  </span>
+                  <select class="form-select">
+                    <option selected>Pricing query</option>
+                    <option>Booking</option>
+                    <option>Prints</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
           <div class="mb-3">
-            <label class="form-label">What is your question about?</label>
-            <select class="form-select">
-              <option selected>Pricing query</option>
-              <option>Booking</option>
-              <option>Prints</option>
-              <option>Other</option>
-            </select>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Your message:</label>
+            
             <textarea class="form-control" rows="4" placeholder="Your query..."></textarea>
           </div>
 
@@ -229,15 +270,7 @@ rel="stylesheet"/>​
       </div>
     </section>
 
-    <!-- OPTIONAL ABOUT (kept similar vibe) -->
-    <section id="about" class="text-center mt-4 py-5 rounded border">
-      <h3>About the Artist</h3>
-      <p class="text-muted mx-auto" style="max-width:700px;">
-        Capturing moments through the lens, my passion is bringing emotions to life in every frame.
-      </p>
-      <button class="btn btn-outline-secondary">Read More</button>
-    </section>
-
+    
   </main>
 
   <!-- FOOTER -->

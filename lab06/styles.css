@@ -1,36 +1,78 @@
+/* ===============================
+   COLOR VARIABLES
+================================= */
 :root{
-  --navy:#071a4d;
-  --heading:#1d4ed8;
-  --sectionbg:#eaf2ff;
+  --navy: #071a4d;
+  --heading: #1d4ed8;
+  --sectionbg: #eaf2ff;
 }
 
-/* Navy nav + footer */
+/* ===============================
+   NAVBAR & FOOTER (NAVY)
+================================= */
 .navbar,
 footer {
   background: var(--navy) !important;
 }
 
-/* Light blue sections */
-.section-blue {
-  background: var(--sectionbg);
-}
-
-/* Blue headings */
+/* ===============================
+   BLUE HEADINGS
+================================= */
 h1, h2, h3 {
   color: var(--heading);
 }
 
-/* Carousel sizing: full width and about half height */
-.carousel-img{
+/* ===============================
+   LIGHT BLUE SECTIONS
+================================= */
+.section-blue {
+  background: var(--sectionbg);
+}
+
+/* ===============================
+   CAROUSEL STYLING
+   100% width, about half height
+================================= */
+.carousel-img {
   width: 100%;
   height: 50vh;
   object-fit: cover;
 }
 
-/* Small polish */
+/* ===============================
+   SHARPER CARDS (REVIEWS)
+================================= */
 .card {
-  border-radius: 10px;
+  border-radius: 2px;
 }
+
+/* ===============================
+   SHARPER FORM FIELDS
+================================= */
+.form-control,
+.form-select,
+textarea {
+  border-radius: 2px;
+}
+
+/* ===============================
+   SHARPER BUTTONS
+================================= */
+/* Slightly rounder submit button */
 .btn {
-  border-radius: 6px;
+  border-radius: 8px;
+}
+
+/* ===============================
+   GET IN TOUCH SUBTEXT (BIGGER)
+================================= */
+.contact-subtext {
+  font-size: 1.2rem;
+}
+
+/* ===============================
+   OPTIONAL: Slight Button Hover
+================================= */
+.btn:hover {
+  opacity: 0.9;
 }
