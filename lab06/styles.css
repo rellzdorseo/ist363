@@ -1,0 +1,36 @@
+:root{
+  --navy:#071a4d;
+  --heading:#1d4ed8;
+  --sectionbg:#eaf2ff;
+}
+
+/* Navy nav + footer */
+.navbar,
+footer {
+  background: var(--navy) !important;
+}
+
+/* Light blue sections */
+.section-blue {
+  background: var(--sectionbg);
+}
+
+/* Blue headings */
+h1, h2, h3 {
+  color: var(--heading);
+}
+
+/* Carousel sizing: full width and about half height */
+.carousel-img{
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+}
+
+/* Small polish */
+.card {
+  border-radius: 10px;
+}
+.btn {
+  border-radius: 6px;
+}

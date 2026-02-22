@@ -1,0 +1,36 @@
+$navy: #071a4d;
+$heading: #1d4ed8;
+$sectionbg: #eaf2ff;
+
+:root{
+  --navy:#{$navy};
+  --heading:#{$heading};
+  --sectionbg:#{$sectionbg};
+}
+
+.navbar,
+footer {
+  background: $navy !important;
+}
+
+.section-blue {
+  background: $sectionbg;
+}
+
+h1, h2, h3 {
+  color: $heading;
+}
+
+.carousel-img{
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+}
+
+.card {
+  border-radius: 10px;
+}
+
+.btn {
+  border-radius: 6px;
+}
