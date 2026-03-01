@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IST 363 Lab 07 - JavaScript</title>
+</head>
+<body>
+  <h1>IST 363 Lab 07</h1>
+  <p>Open the browser console to see the output.</p>
+
+  <script>
+    // #1 Logging Text and Variables
+    let favNumber = 5;
+    console.log("My favorite number is " + favNumber + ".");
+
+    // #2 Working with Arrays
+    let favoriteFoods = ["pizza", "wings", "pasta", "tacos"];
+    console.log("Second favorite food: " + favoriteFoods[1]);
+
+    favoriteFoods.push("sushi");
+    console.log("Updated favorite foods array: " + favoriteFoods);
+
+    // #3 Looping thru an Array
+    for (let i = 0; i < favoriteFoods.length; i++) {
+      console.log("Favorite Food " + (i + 1) + ": " + favoriteFoods[i]);
+    }
+
+    // #4 Filtering an Array (exclude the second entry)
+    for (let i = 0; i < favoriteFoods.length; i++) {
+      if (i !== 1) {
+        console.log("Filtered Favorite Food " + (i + 1) + ": " + favoriteFoods[i]);
+      }
+    }
+
+    // #5 Creating and Using Objects
+    let book = {
+      title: "The Alchemist",
+      author: "Paulo Coelho",
+      yearPublished: 1988,
+      isAvailable: true
+    };
+
+    console.log("Book title: " + book.title);
+    console.log("Book author: " + book.author);
+
+    if (book.isAvailable === true) {
+      console.log("This book is available for checkout.");
+    } else {
+      console.log("Sorry, this book is currently checked out.");
+    }
+
+    // #6 While Loops (even numbers up to 20)
+    let x = 2;
+    while (x <= 20) {
+      console.log(x);
+      x += 2;
+    }
+
+    // #7 Random Number (simulate rolling a six-sided die)
+    let dieRoll = Math.floor(Math.random() * 6) + 1;
+    console.log("You rolled a " + dieRoll);
+  </script>
+</body>
+</html>
