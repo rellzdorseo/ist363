@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+    <h2>Dog Year Calculator</h2>
+    
+    <label for="humanAge">Enter Human Years:</label>
+    <input type="number" class="age-input" placeholder="e.g. 5">
+    
+    <button name="calc-btn">Calculate</button>
+
+    <p>Your dog is: <span class="result-display">0</span> years old.</p>
+
+    <script src="app.js"></script>
+    <script>
+        const inputField = document.querySelector('.age-input');
+        const calcButton = document.querySelector('button[name="calc-btn"]');
+        const display = document.querySelector('.result-display');
+        
+       
+        calcButton.addEventListener('click', () => {
+            const humanYears = inputField.value;
+        
+            if (humanYears > 0) {
+                
+                const dogYears = humanYears * 7;
+        
+                
+                display.innerText = dogYears;
+            } else {
+                display.innerText = "Please enter a valid number";
+            }
+        });
+        </script>
+</body>
+</html>
+
