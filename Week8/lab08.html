@@ -57,7 +57,6 @@
       position: absolute;
       left: 40px;
       top: 55px;
-      transition: all 1s ease-in-out;
     }
 
     #fireballright {
@@ -65,7 +64,6 @@
       left: 260px;
       top: 55px;
       transform: rotate(180deg);
-      transition: all 1s ease-in-out;
     }
 
     .medievalsharp-regular {
@@ -96,13 +94,8 @@
       margin-top: 10px;
     }
 
-    .animate-left {
-      animation: moveRight 0.9s ease-in-out;
-    }
-
-    .animate-right {
-      animation: moveLeft 0.9s ease-in-out;
-    }
+    .animate-left { animation: moveRight 0.9s ease-in-out; }
+    .animate-right { animation: moveLeft 0.9s ease-in-out; }
 
     @keyframes moveRight {
       0%   { left: 40px; opacity: 1; }
@@ -129,16 +122,16 @@
 
     <div id="gameboard">
       <div class="chars">
-        <img src="/Week8/images/monster.jpg" alt="monster" id="monster">
+        <img src="images/monster.jpg" alt="monster" id="monster">
       </div>
 
       <div class="fireball">
-        <img src="/Week8/images/fireball.gif" alt="fireball" id="fireballleft">
-        <img src="/Week8/images/fireball.gif" alt="fireball" id="fireballright">
+        <img src="images/fireball.gif" alt="fireball" id="fireballleft">
+        <img src="images/fireball.gif" alt="fireball" id="fireballright">
       </div>
 
       <div class="chars">
-        <img src="/Week8/images/girl.jpg" alt="girl" id="girl">
+        <img src="images/girl.jpg" alt="girl" id="girl">
       </div>
     </div>
 
@@ -157,12 +150,17 @@
   <script>
     let monsterShield = 100;
     let girlShield = 100;
+    let gameOver = false;
 
+    const monsterImg = document.querySelector("#monster");
+    const girlImg = document.querySelector("#girl");
     const mscoreEl = document.querySelector("#mscore");
     const gscoreEl = document.querySelector("#gscore");
     const throwBtn = document.querySelector("#throwBtn");
     const resultEl = document.querySelector("#result");
     const playButtonDiv = document.querySelector("#playbutton");
+
+    const boomPath = "/Week8/images/boom.png";
 
     throwBtn.addEventListener("click", playGame);
 
@@ -173,10 +171,12 @@
       leftBall.classList.remove("animate-left");
       rightBall.classList.remove("animate-right");
 
-      setTimeout(() => {
-        leftBall.classList.add("animate-left");
-        rightBall.classList.add("animate-right");
-      }, 10);
+      // force animation restart
+      void leftBall.offsetWidth;
+      void rightBall.offsetWidth;
+
+      leftBall.classList.add("animate-left");
+      rightBall.classList.add("animate-right");
     }
 
     function randomInt(min, max) {
@@ -184,43 +184,68 @@
     }
 
     function playGame() {
+      if (gameOver) return;
+
       animateFireball();
 
-      const monsterThrow = randomInt(1, 20);
-      const girlThrow = randomInt(1, 20);
+      // save previous shield values
+      const prevMonster = monsterShield;
+      const prevGirl = girlShield;
 
+      // random damage
+      const monsterThrow = randomInt(1, 20); // hits girl
+      const girlThrow = randomInt(1, 20);    // hits monster
+
+      // apply damage
       monsterShield -= girlThrow;
       girlShield -= monsterThrow;
 
-      const displayMonster = Math.max(monsterShield, 0);
-      const displayGirl = Math.max(girlShield, 0);
+      // update displayed scores
+      mscoreEl.innerText = Math.max(monsterShield, 0);
+      gscoreEl.innerText = Math.max(girlShield, 0);
 
-      mscoreEl.innerText = displayMonster;
-      gscoreEl.innerText = displayGirl;
+      // detect who got defeated THIS round
+      const monsterDefeatedNow = (prevMonster > 0 && monsterShield <= 0);
+      const girlDefeatedNow = (prevGirl > 0 && girlShield <= 0);
 
-      if (monsterShield <= 0 && girlShield <= 0) {
-        endGame("They both lost!");
-      } else if (monsterShield <= 0) {
-        endGame("Monster lost! Girl won!");
-      } else if (girlShield <= 0) {
-        endGame("Girl lost! Monster won!");
-      } else {
-        resultEl.innerText = `Monster hit: ${monsterThrow} | Girl hit: ${girlThrow}`;
+      // if both defeated in same click, choose who "lost first"
+      // rule: whoever ends lower (more negative) is treated as defeated first
+      if (monsterDefeatedNow && girlDefeatedNow) {
+        if (monsterShield < girlShield) {
+          monsterImg.src = boomPath;
+          endGame("Monster was defeated first! Girl won!");
+        } else if (girlShield < monsterShield) {
+          girlImg.src = boomPath;
+          endGame("Girl was defeated first! Monster won!");
+        } else {
+          // exact tie
+          monsterImg.src = boomPath;
+          endGame("Tie! Monster was marked defeated first.");
+        }
+        return;
       }
+
+      // only one defeated
+      if (monsterDefeatedNow) {
+        monsterImg.src = boomPath;
+        endGame("Monster lost! Girl won!");
+        return;
+      }
+
+      if (girlDefeatedNow) {
+        girlImg.src = boomPath;
+        endGame("Girl lost! Monster won!");
+        return;
+      }
+
+      // keep playing
+      resultEl.innerText = `Monster hit: ${monsterThrow} | Girl hit: ${girlThrow}`;
     }
 
     function endGame(message) {
+      gameOver = true;
       resultEl.innerText = message;
       playButtonDiv.innerHTML = "";
-
-      if (monsterShield <= 0 && girlShield <= 0) {
-        document.querySelector("#monster").src = "/Week8/images/boom.png";
-        document.querySelector("#girl").src = "boom.png";
-      } else if (monsterShield <= 0) {
-        document.querySelector("#monster").src = "boom.png";
-      } else if (girlShield <= 0) {
-        document.querySelector("#girl").src = "boom.png";
-      }
     }
   </script>
 </body>
