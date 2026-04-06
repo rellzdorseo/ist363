@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPORTSPULSE — Live Sports Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#080b10;
+      --surface:#0e131c;
+      --card:#141b27;
+      --border:#1e2a3a;
+      --accent:#e8ff47;
+      --accent2:#ff4747;
+      --text:#e8edf5;
+      --muted:#5a6880;
+      --live:#ff4747;
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      background:var(--bg);
+      color:var(--text);
+      font-family:'DM Sans',sans-serif;
+      min-height:100vh;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      background:rgba(8,11,16,.85);
+      border-bottom:1px solid var(--border);
+      padding:0 2rem;
+      height:64px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .logo{font-family:'Bebas Neue';font-size:1.8rem;}
+    .logo span{color:var(--accent);}
+
+    nav{display:flex;gap:2rem;}
+    nav a{color:var(--muted);text-decoration:none;font-size:.85rem;}
+    nav a:hover{color:var(--accent);}
+
+    main{
+      padding:2rem;
+      display:grid;
+      grid-template-columns:1fr 340px;
+      gap:1.5rem;
+    }
+
+    #scores-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+      gap:1rem;
+    }
+
+    .score-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:1.25rem;
+    }
+
+    .team-row{
+      display:flex;
+      justify-content:space-between;
+      margin:8px 0;
+    }
+
+    .team-score{
+      font-size:1.5rem;
+    }
+
+    .team-score.winning{color:var(--accent);}
+
+    .tab{
+      padding:6px 12px;
+      border:1px solid var(--border);
+      background:none;
+      color:var(--muted);
+      cursor:pointer;
+    }
+
+    .tab.active{
+      background:var(--accent);
+      color:black;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">SPORT<span>PULSE</span></div>
+  <nav>
+    <a href="#">Scores</a>
+    <a href="#">Standings</a>
+  </nav>
+</header>
+
+<section>
+  <h1>Sports Dashboard</h1>
+  <div>
+    <button class="tab active" data-league="nfl">NFL</button>
+    <button class="tab" data-league="nba">NBA</button>
+    <button class="tab" data-league="mlb">MLB</button>
+    <button class="tab" data-league="nhl">NHL</button>
+  </div>
+</section>
+
+<main>
+  <section>
+    <h2>Scores</h2>
+    <div id="scores-grid"></div>
+  </section>
+
+  <aside>
+    <h2>Standings</h2>
+    <div id="standings-panel"></div>
+  </aside>
+</main>
+
+<script>
+const LEAGUES = {
+  nfl:{label:'NFL',espnSlug:'football/nfl',sportsdbId:4391},
+  nba:{label:'NBA',espnSlug:'basketball/nba',sportsdbId:4387},
+  mlb:{label:'MLB',espnSlug:'baseball/mlb',sportsdbId:4424},
+  nhl:{label:'NHL',espnSlug:'hockey/nhl',sportsdbId:4380}
+};
+
+let currentLeague='nfl';
+
+const $=id=>document.getElementById(id);
+
+async function fetchScores(league){
+  const url=`https://site.api.espn.com/apis/site/v2/sports/${LEAGUES[league].espnSlug}/scoreboard`;
+  const res=await fetch(url);
+  const data=await res.json();
+  return data.events||[];
+}
+
+async function fetchStandings(league){
+  const url=`https://www.thesportsdb.com/api/v1/json/3/lookuptable.php?l=${LEAGUES[league].sportsdbId}&s=2023-2024`;
+  const res=await fetch(url);
+  const data=await res.json();
+  return data.table||[];
+}
+
+function renderScores(events){
+  const grid=$('scores-grid');
+
+  grid.innerHTML=events.slice(0,6).map(event=>{
+    const comp=event.competitions[0];
+    const teams=comp.competitors;
+
+    const home=teams.find(t=>t.homeAway==='home');
+    const away=teams.find(t=>t.homeAway==='away');
+
+    const homeScore=home.score||'-';
+    const awayScore=away.score||'-';
+
+    return `
+    <div class="score-card">
+      <div>${away.team.shortDisplayName} vs ${home.team.shortDisplayName}</div>
+      <div class="team-row">
+        <span>${away.team.shortDisplayName}</span>
+        <span class="team-score">${awayScore}</span>
+      </div>
+      <div class="team-row">
+        <span>${home.team.shortDisplayName}</span>
+        <span class="team-score">${homeScore}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderStandings(table){
+  const panel=$('standings-panel');
+
+  panel.innerHTML=table.slice(0,5).map(team=>`
+    <div>${team.strTeam} (${team.intWin}-${team.intLoss})</div>
+  `).join('');
+}
+
+async function loadLeague(league){
+  currentLeague=league;
+
+  const [events,table]=await Promise.all([
+    fetchScores(league),
+    fetchStandings(league)
+  ]);
+
+  renderScores(events);
+  renderStandings(table);
+}
+
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    loadLeague(btn.dataset.league);
+  });
+});
+
+loadLeague('nfl');
+</script>
+
+</body>
+</html>
