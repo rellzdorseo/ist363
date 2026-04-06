@@ -6,208 +6,698 @@
   <title>SPORTSPULSE — Live Sports Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
+    /* ─── TOKENS ─────────────────────────────────────────────── */
     :root {
-      --bg:#080b10;
-      --surface:#0e131c;
-      --card:#141b27;
-      --border:#1e2a3a;
-      --accent:#e8ff47;
-      --accent2:#ff4747;
-      --text:#e8edf5;
-      --muted:#5a6880;
-      --live:#ff4747;
+      --bg:        #080b10;
+      --surface:   #0e131c;
+      --card:      #141b27;
+      --border:    #1e2a3a;
+      --accent:    #e8ff47;
+      --accent2:   #ff4747;
+      --text:      #e8edf5;
+      --muted:     #5a6880;
+      --live:      #ff4747;
     }
 
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{
-      background:var(--bg);
-      color:var(--text);
-      font-family:'DM Sans',sans-serif;
-      min-height:100vh;
+    /* ─── RESET ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    header{
-      position:sticky;
-      top:0;
-      background:rgba(8,11,16,.85);
-      border-bottom:1px solid var(--border);
-      padding:0 2rem;
-      height:64px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+    /* ─── NOISE OVERLAY ──────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .logo{font-family:'Bebas Neue';font-size:1.8rem;}
-    .logo span{color:var(--accent);}
-
-    nav{display:flex;gap:2rem;}
-    nav a{color:var(--muted);text-decoration:none;font-size:.85rem;}
-    nav a:hover{color:var(--accent);}
-
-    main{
-      padding:2rem;
-      display:grid;
-      grid-template-columns:1fr 340px;
-      gap:1.5rem;
+    /* ─── HEADER ─────────────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 11, 16, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.8rem;
+      letter-spacing: 0.08em;
+      color: var(--text);
+    }
+    .logo span { color: var(--accent); }
+    nav { display: flex; gap: 2rem; }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--accent); }
+    .live-badge {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+      color: var(--live); text-transform: uppercase;
+    }
+    .live-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--live);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.7); }
     }
 
-    #scores-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-      gap:1rem;
+    /* ─── HERO ───────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      padding: 4rem 2rem 3rem;
+      overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 400px;
+      background: radial-gradient(ellipse, rgba(232,255,71,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(3rem, 8vw, 6rem);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      position: relative;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+      -webkit-text-stroke: 1px var(--accent);
+    }
+    .hero p {
+      color: var(--muted);
+      max-width: 480px;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+    .league-tabs {
+      display: flex; gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .tab {
+      padding: 0.45rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.04em;
+    }
+    .tab:hover  { border-color: var(--accent); color: var(--accent); }
+    .tab.active { background: var(--accent); border-color: var(--accent); color: #000; font-weight: 700; }
+
+    /* ─── MAIN GRID ──────────────────────────────────────────── */
+    main {
+      padding: 0 2rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 1.5rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; }
     }
 
-    .score-card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:1.25rem;
+    /* ─── SECTION LABELS ─────────────────────────────────────── */
+    .section-label {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.15rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
     }
 
-    .team-row{
-      display:flex;
-      justify-content:space-between;
-      margin:8px 0;
+    /* ─── SCORE CARDS ────────────────────────────────────────── */
+    #scores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .score-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+      animation: fadeUp 0.4s ease both;
+    }
+    .score-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .card-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--muted); text-transform: uppercase;
+    }
+    .status-live  { color: var(--live); }
+    .status-final { color: var(--muted); }
+    .status-sched { color: #5b8fff; }
+    .matchup {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .team-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .team-info { display: flex; align-items: center; gap: 0.65rem; flex: 1; min-width: 0; }
+    .team-logo {
+      width: 32px; height: 32px; object-fit: contain;
+      border-radius: 4px; flex-shrink: 0;
+      background: var(--surface);
+    }
+    .team-name {
+      font-weight: 600; font-size: 0.9rem;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .team-score {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.6rem; letter-spacing: 0.04em;
+      color: var(--text); min-width: 40px; text-align: right;
+    }
+    .team-score.winning { color: var(--accent); }
+    .divider { height: 1px; background: var(--border); }
+
+    /* ─── STANDINGS TABLE ────────────────────────────────────── */
+    #standings-panel { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .standings-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      animation: fadeUp 0.5s ease both;
+    }
+    .standings-header {
+      background: var(--surface);
+      padding: 0.75rem 1rem;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    thead th:not(:first-child) { text-align: center; }
+    tbody tr { transition: background 0.15s; }
+    tbody tr:hover { background: rgba(255,255,255,0.03); }
+    tbody td {
+      padding: 0.6rem 0.75rem;
+      font-size: 0.82rem;
+      border-bottom: 1px solid rgba(30,42,58,0.5);
+    }
+    tbody td:not(:first-child) { text-align: center; color: var(--muted); }
+    .rank { color: var(--muted); font-size: 0.72rem; width: 20px; }
+    .team-cell { display: flex; align-items: center; gap: 0.5rem; }
+    .team-cell img { width: 20px; height: 20px; object-fit: contain; }
+    .highlight-row td { color: var(--accent) !important; font-weight: 600; }
+    .highlight-row td:not(:first-child) { color: var(--accent) !important; }
+
+    /* ─── NEWS TICKER ────────────────────────────────────────── */
+    .ticker-wrap {
+      overflow: hidden;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0.55rem 0;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .ticker-label {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      background: var(--accent); color: #000;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 0.85rem; letter-spacing: 0.1em;
+      display: flex; align-items: center; padding: 0 1rem;
+      z-index: 2;
+    }
+    .ticker-track {
+      display: flex; gap: 0; 
+      animation: ticker 30s linear infinite;
+      white-space: nowrap;
+      padding-left: 160px;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      display: inline-flex; align-items: center; gap: 1rem;
+      font-size: 0.82rem; color: var(--muted);
+      padding: 0 2.5rem;
+    }
+    .ticker-item::before {
+      content: '◆';
+      color: var(--accent);
+      font-size: 0.5rem;
     }
 
-    .team-score{
-      font-size:1.5rem;
+    /* ─── SKELETON ───────────────────────────────────────────── */
+    .skeleton {
+      background: linear-gradient(90deg, var(--card) 25%, var(--border) 50%, var(--card) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 6px;
+    }
+    @keyframes shimmer {
+      from { background-position: 200% 0; }
+      to   { background-position: -200% 0; }
+    }
+    .skel-card {
+      height: 140px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
     }
 
-    .team-score.winning{color:var(--accent);}
-
-    .tab{
-      padding:6px 12px;
-      border:1px solid var(--border);
-      background:none;
-      color:var(--muted);
-      cursor:pointer;
+    /* ─── ERROR STATE ────────────────────────────────────────── */
+    .error-msg {
+      color: var(--accent2);
+      background: rgba(255,71,71,0.08);
+      border: 1px solid rgba(255,71,71,0.2);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      font-size: 0.85rem;
     }
 
-    .tab.active{
-      background:var(--accent);
-      color:black;
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    footer .logo { font-size: 1.2rem; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      header { padding: 0 1rem; }
+      nav { display: none; }
+      main { padding: 0 1rem 3rem; }
+      .hero { padding: 2.5rem 1rem 2rem; }
     }
   </style>
 </head>
-
 <body>
 
+<!-- HEADER -->
 <header>
   <div class="logo">SPORT<span>PULSE</span></div>
   <nav>
-    <a href="#">Scores</a>
-    <a href="#">Standings</a>
+    <a href="#scores">Scores</a>
+    <a href="#standings">Standings</a>
   </nav>
+  <div class="live-badge"><div class="live-dot"></div> Live</div>
 </header>
 
-<section>
-  <h1>Sports Dashboard</h1>
-  <div>
-    <button class="tab active" data-league="nfl">NFL</button>
-    <button class="tab" data-league="nba">NBA</button>
-    <button class="tab" data-league="mlb">MLB</button>
-    <button class="tab" data-league="nhl">NHL</button>
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-label">BREAKING</div>
+  <div class="ticker-track" id="ticker-track">
+    <!-- duplicated for seamless loop -->
+    <span class="ticker-item">Loading latest scores...</span>
+    <span class="ticker-item">Loading latest scores...</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <h1>YOUR <em>SPORTS</em><br>DASHBOARD</h1>
+  <p>Real-time scores, standings, and news powered by live APIs. Pick your league below.</p>
+  <div class="league-tabs" id="league-tabs">
+    <button class="tab active" data-league="nfl">🏈 NFL</button>
+    <button class="tab" data-league="nba">🏀 NBA</button>
+    <button class="tab" data-league="mlb">⚾ MLB</button>
+    <button class="tab" data-league="nhl">🏒 NHL</button>
   </div>
 </section>
 
+<!-- MAIN -->
 <main>
-  <section>
-    <h2>Scores</h2>
-    <div id="scores-grid"></div>
+
+  <!-- SCORES -->
+  <section id="scores">
+    <div class="section-label">Recent &amp; Upcoming Scores</div>
+    <div id="scores-grid">
+      <!-- skeleton placeholders -->
+      <div class="skel-card"><div class="skeleton" style="height:14px;width:60%"></div><div class="skeleton" style="height:36px;"></div><div class="skeleton" style="height:36px;"></div></div>
+      <div class="skel-card"><div class="skeleton" style="height:14px;width:60%"></div><div class="skeleton" style="height:36px;"></div><div class="skeleton" style="height:36px;"></div></div>
+      <div class="skel-card"><div class="skeleton" style="height:14px;width:60%"></div><div class="skeleton" style="height:36px;"></div><div class="skeleton" style="height:36px;"></div></div>
+    </div>
   </section>
 
-  <aside>
-    <h2>Standings</h2>
-    <div id="standings-panel"></div>
+  <!-- STANDINGS -->
+  <aside id="standings">
+    <div id="standings-panel">
+      <div class="section-label">Standings</div>
+      <div class="skel-card" style="height:300px"></div>
+    </div>
   </aside>
+
 </main>
 
+<!-- FOOTER -->
+<footer>
+  <div class="logo">SPORT<span style="color:var(--accent)">PULSE</span></div>
+  <div>Data: ESPN Public API &amp; TheSportsDB &nbsp;|&nbsp; Built with Fetch API &amp; async/await</div>
+  <div>Your Name &nbsp;&bull;&nbsp; Project 2</div>
+</footer>
+
 <script>
+/* ══════════════════════════════════════════════════════════════
+   SPORTSPULSE — main.js
+   APIs used:
+     1. ESPN public API  — scores / schedule (no key required)
+     2. TheSportsDB API  — league standings  (no key required)
+   Techniques: Fetch, Promises, async/await, error handling, JSON
+══════════════════════════════════════════════════════════════ */
+
+// ── CONFIG ──────────────────────────────────────────────────────
 const LEAGUES = {
-  nfl:{label:'NFL',espnSlug:'football/nfl',sportsdbId:4391},
-  nba:{label:'NBA',espnSlug:'basketball/nba',sportsdbId:4387},
-  mlb:{label:'MLB',espnSlug:'baseball/mlb',sportsdbId:4424},
-  nhl:{label:'NHL',espnSlug:'hockey/nhl',sportsdbId:4380}
+  nfl: {
+    label: 'NFL',
+    espnSlug:  'football/nfl',
+    sportsdbId: 4391,
+    divisionLabel: 'AFC East'
+  },
+  nba: {
+    label: 'NBA',
+    espnSlug:  'basketball/nba',
+    sportsdbId: 4387,
+    divisionLabel: 'Atlantic'
+  },
+  mlb: {
+    label: 'MLB',
+    espnSlug:  'baseball/mlb',
+    sportsdbId: 4424,
+    divisionLabel: 'AL East'
+  },
+  nhl: {
+    label: 'NHL',
+    espnSlug:  'hockey/nhl',
+    sportsdbId: 4380,
+    divisionLabel: 'Atlantic'
+  }
 };
 
-let currentLeague='nfl';
+let currentLeague = 'nfl';
 
-const $=id=>document.getElementById(id);
+// ── UTILITY ──────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
 
-async function fetchScores(league){
-  const url=`https://site.api.espn.com/apis/site/v2/sports/${LEAGUES[league].espnSlug}/scoreboard`;
-  const res=await fetch(url);
-  const data=await res.json();
-  return data.events||[];
+function statusClass(status) {
+  if (!status) return '';
+  const s = status.toLowerCase();
+  if (s === 'in' || s.includes('progress') || s.includes('live')) return 'status-live';
+  if (s === 'final' || s === 'post' || s.includes('final')) return 'status-final';
+  return 'status-sched';
+}
+function statusLabel(status, detail) {
+  if (!status) return 'Scheduled';
+  const s = status.toLowerCase();
+  if (s === 'in' || s.includes('progress')) return `🔴 LIVE ${detail || ''}`;
+  if (s === 'final' || s === 'post') return 'Final';
+  return detail || status;
 }
 
-async function fetchStandings(league){
-  const url=`https://www.thesportsdb.com/api/v1/json/3/lookuptable.php?l=${LEAGUES[league].sportsdbId}&s=2023-2024`;
-  const res=await fetch(url);
-  const data=await res.json();
-  return data.table||[];
+// ── API 1: ESPN SCORES ───────────────────────────────────────────
+async function fetchScores(league) {
+  const { espnSlug } = LEAGUES[league];
+  const url = `https://site.api.espn.com/apis/site/v2/sports/${espnSlug}/scoreboard`;
+
+  const response = await fetch(url);          // Fetch API call
+  if (!response.ok) throw new Error(`ESPN API error: ${response.status}`);
+  const data = await response.json();         // JSON parsing
+  return data.events || [];
 }
 
-function renderScores(events){
-  const grid=$('scores-grid');
+// ── API 2: THESPORTSDB STANDINGS ─────────────────────────────────
+async function fetchStandings(league) {
+  const { sportsdbId } = LEAGUES[league];
+  const url = `https://www.thesportsdb.com/api/v1/json/3/lookuptable.php?l=${sportsdbId}&s=2023-2024`;
 
-  grid.innerHTML=events.slice(0,6).map(event=>{
-    const comp=event.competitions[0];
-    const teams=comp.competitors;
+  const response = await fetch(url);          // Fetch API call
+  if (!response.ok) throw new Error(`TheSportsDB API error: ${response.status}`);
+  const data = await response.json();         // JSON parsing
+  return data.table || [];
+}
 
-    const home=teams.find(t=>t.homeAway==='home');
-    const away=teams.find(t=>t.homeAway==='away');
+// ── RENDER: SCORE CARDS ──────────────────────────────────────────
+function renderScores(events) {
+  const grid = $('scores-grid');
+  if (!events.length) {
+    grid.innerHTML = `<p style="color:var(--muted)">No games found for this league right now.</p>`;
+    return;
+  }
 
-    const homeScore=home.score||'-';
-    const awayScore=away.score||'-';
+  // Show up to 9 games
+  const shown = events.slice(0, 9);
+
+  grid.innerHTML = shown.map((event, i) => {
+    const comps = event.competitions?.[0];
+    const competitors = comps?.competitors || [];
+    const home = competitors.find(c => c.homeAway === 'home') || competitors[0] || {};
+    const away = competitors.find(c => c.homeAway === 'away') || competitors[1] || {};
+
+    const statusType  = comps?.status?.type?.name || '';
+    const statusDetail = comps?.status?.displayClock || comps?.status?.type?.shortDetail || '';
+    const homeScore = parseInt(home.score ?? '-1');
+    const awayScore = parseInt(away.score ?? '-1');
+    const homeWin = homeScore > awayScore;
+    const awayWin = awayScore > homeScore;
+    const showScore = homeScore >= 0 && awayScore >= 0;
+
+    const homeLogo = home.team?.logo || `https://a.espncdn.com/i/teamlogos/leagues/500/nfl.png`;
+    const awayLogo = away.team?.logo || homeLogo;
+
+    const venueStr = comps?.venue?.fullName ? `📍 ${comps.venue.fullName}` : '';
+    const dateStr  = new Date(event.date).toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
 
     return `
-    <div class="score-card">
-      <div>${away.team.shortDisplayName} vs ${home.team.shortDisplayName}</div>
-      <div class="team-row">
-        <span>${away.team.shortDisplayName}</span>
-        <span class="team-score">${awayScore}</span>
+    <div class="score-card" style="animation-delay:${i * 60}ms">
+      <div class="card-meta">
+        <span>${dateStr} ${venueStr}</span>
+        <span class="${statusClass(statusType)}">${statusLabel(statusType, statusDetail)}</span>
       </div>
-      <div class="team-row">
-        <span>${home.team.shortDisplayName}</span>
-        <span class="team-score">${homeScore}</span>
+      <div class="matchup">
+        <div class="team-row">
+          <div class="team-info">
+            <img class="team-logo" src="${awayLogo}" alt="${away.team?.displayName}" onerror="this.src='https://a.espncdn.com/i/teamlogos/leagues/500/nfl.png'">
+            <span class="team-name">${away.team?.shortDisplayName || 'Away'}</span>
+          </div>
+          <span class="team-score ${awayWin && showScore ? 'winning' : ''}">${showScore ? awayScore : '—'}</span>
+        </div>
+        <div class="divider"></div>
+        <div class="team-row">
+          <div class="team-info">
+            <img class="team-logo" src="${homeLogo}" alt="${home.team?.displayName}" onerror="this.src='https://a.espncdn.com/i/teamlogos/leagues/500/nfl.png'">
+            <span class="team-name">${home.team?.shortDisplayName || 'Home'}</span>
+          </div>
+          <span class="team-score ${homeWin && showScore ? 'winning' : ''}">${showScore ? homeScore : '—'}</span>
+        </div>
       </div>
     </div>`;
   }).join('');
 }
 
-function renderStandings(table){
-  const panel=$('standings-panel');
+// ── RENDER: STANDINGS ────────────────────────────────────────────
+function renderStandings(table, leagueLabel) {
+  const panel = $('standings-panel');
+  if (!table.length) {
+    panel.innerHTML = `<div class="section-label">Standings</div><p style="color:var(--muted);font-size:.85rem">Standings unavailable for current season.</p>`;
+    return;
+  }
 
-  panel.innerHTML=table.slice(0,5).map(team=>`
-    <div>${team.strTeam} (${team.intWin}-${team.intLoss})</div>
-  `).join('');
+  // Show top 10
+  const top = table.slice(0, 10);
+
+  panel.innerHTML = `
+    <div class="section-label">Standings</div>
+    <div class="standings-card">
+      <div class="standings-header">${leagueLabel} — Top Teams</div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th>W</th>
+            <th>L</th>
+            <th>Pts</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${top.map((row, i) => `
+          <tr class="${i === 0 ? 'highlight-row' : ''}">
+            <td class="rank">${row.intRank || i + 1}</td>
+            <td>
+              <div class="team-cell">
+                <img src="${row.strTeamBadge || ''}" alt="${row.strTeam}" onerror="this.style.display='none'">
+                <span>${row.strTeam}</span>
+              </div>
+            </td>
+            <td>${row.intWin ?? '—'}</td>
+            <td>${row.intLoss ?? '—'}</td>
+            <td>${row.intPoints ?? '—'}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
 }
 
-async function loadLeague(league){
-  currentLeague=league;
+// ── RENDER: TICKER ───────────────────────────────────────────────
+function renderTicker(events) {
+  const track = $('ticker-track');
+  if (!events.length) return;
 
-  const [events,table]=await Promise.all([
-    fetchScores(league),
-    fetchStandings(league)
-  ]);
+  const items = events.slice(0, 12).map(e => {
+    const comps = e.competitions?.[0];
+    const competitors = comps?.competitors || [];
+    const home = competitors.find(c => c.homeAway === 'home') || competitors[0] || {};
+    const away = competitors.find(c => c.homeAway === 'away') || competitors[1] || {};
+    const awayName  = away.team?.abbreviation  || 'Away';
+    const homeName  = home.team?.abbreviation  || 'Home';
+    const awayScore = away.score ?? '';
+    const homeScore = home.score ?? '';
+    const scoreStr  = awayScore !== '' ? `${awayScore} – ${homeScore}` : 'Upcoming';
+    return `<span class="ticker-item">${awayName} vs ${homeName}: ${scoreStr}</span>`;
+  });
 
-  renderScores(events);
-  renderStandings(table);
+  // Duplicate for seamless infinite scroll
+  const all = [...items, ...items].join('');
+  track.innerHTML = all;
 }
 
-document.querySelectorAll('.tab').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+// ── LOAD DATA ────────────────────────────────────────────────────
+async function loadLeague(league) {
+  currentLeague = league;
+  const leagueLabel = LEAGUES[league].label;
+
+  // Show skeletons
+  $('scores-grid').innerHTML = [1,2,3].map(() => `
+    <div class="skel-card">
+      <div class="skeleton" style="height:12px;width:55%"></div>
+      <div class="skeleton" style="height:38px"></div>
+      <div class="skeleton" style="height:38px"></div>
+    </div>`).join('');
+
+  $('standings-panel').innerHTML = `
+    <div class="section-label">Standings</div>
+    <div class="skel-card" style="height:320px"></div>`;
+
+  // Run both API calls concurrently with Promise.all
+  try {
+    const [events, table] = await Promise.all([
+      fetchScores(league),
+      fetchStandings(league)
+    ]);
+
+    renderScores(events);
+    renderStandings(table, leagueLabel);
+    renderTicker(events);
+
+  } catch (err) {
+    // Graceful error handling
+    console.error('Data load error:', err);
+
+    $('scores-grid').innerHTML = `
+      <div class="error-msg">
+        ⚠️ Could not load scores. The ESPN API may be temporarily unavailable or there may be a CORS issue in your local environment.
+        <br><br>Try hosting the file on a local server: <code>npx serve .</code>
+      </div>`;
+
+    // Try to load at least one of them
+    try {
+      const table = await fetchStandings(league);
+      renderStandings(table, leagueLabel);
+    } catch (e2) {
+      $('standings-panel').innerHTML = `<div class="section-label">Standings</div><div class="error-msg">⚠️ Standings also unavailable.</div>`;
+    }
+  }
+}
+
+// ── TABS ─────────────────────────────────────────────────────────
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
     loadLeague(btn.dataset.league);
   });
 });
 
+// ── INIT ─────────────────────────────────────────────────────────
 loadLeague('nfl');
 </script>
-
 </body>
 </html>
