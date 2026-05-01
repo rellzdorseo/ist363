@@ -1,7 +1,7 @@
 const person = {
-  name: "Schneider J",
+  name: "Jarell D",
   year: "Senior",
-  major: "Data Analytics",
+  major: "Information Mangement",
 };
 
 function Card1() {

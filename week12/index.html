@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MovieList — Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="brand">
+      <span class="brand-icon">▶</span>
+      <span class="brand-name">MovieList</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="watchlist.html" class="nav-link">Watchlist</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Your personal cinema vault</p>
+      <h1 class="hero-title">Discover.<br>Save.<br>Watch.</h1>
+      <p class="hero-sub">Search any film and build your perfect watchlist.</p>
+    </div>
+    <div class="hero-bg-text" aria-hidden="true">FILM</div>
+  </section>
+
+  <!-- SEARCH -->
+  <section class="search-section">
+    <div class="search-wrap">
+      <div class="search-bar">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" class="search-input" placeholder="Search for a movie..." />
+        <button class="search-btn">Search</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="results-section">
+    <div class="container">
+      <h2 class="section-label">Trending Now</h2>
+      <div class="results-grid">
+
+        <!-- Card 1 -->
+        <div class="movie-card">
+          <div class="movie-poster" style="background: linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+            <div class="poster-overlay">
+              <span class="poster-icon">🎬</span>
+            </div>
+            <div class="movie-rating-badge">8.8</div>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">Inception</h3>
+            <p class="movie-meta">2010 &middot; Christopher Nolan &middot; Sci-Fi</p>
+            <a href="detail.html" class="movie-detail-link">View details →</a>
+            <button class="add-btn">+ Add to Watchlist</button>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="movie-card">
+          <div class="movie-poster" style="background: linear-gradient(160deg, #0d0d0d 0%, #1c1c1c 50%, #2d1b00 100%);">
+            <div class="poster-overlay">
+              <span class="poster-icon">🌌</span>
+            </div>
+            <div class="movie-rating-badge">8.6</div>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">Interstellar</h3>
+            <p class="movie-meta">2014 &middot; Christopher Nolan &middot; Drama</p>
+            <a href="detail.html" class="movie-detail-link">View details →</a>
+            <button class="add-btn">+ Add to Watchlist</button>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="movie-card">
+          <div class="movie-poster" style="background: linear-gradient(160deg, #0a0a0a 0%, #1a1a1a 50%, #2a1500 100%);">
+            <div class="poster-overlay">
+              <span class="poster-icon">🦇</span>
+            </div>
+            <div class="movie-rating-badge rating-gold">9.0</div>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">The Dark Knight</h3>
+            <p class="movie-meta">2008 &middot; Christopher Nolan &middot; Action</p>
+            <a href="detail.html" class="movie-detail-link">View details →</a>
+            <button class="add-btn">+ Add to Watchlist</button>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="movie-card">
+          <div class="movie-poster" style="background: linear-gradient(160deg, #1a0a2e 0%, #2e1a4e 50%, #4a1e6e 100%);">
+            <div class="poster-overlay">
+              <span class="poster-icon">🌀</span>
+            </div>
+            <div class="movie-rating-badge">8.5</div>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">Parasite</h3>
+            <p class="movie-meta">2019 &middot; Bong Joon-ho &middot; Thriller</p>
+            <a href="detail.html" class="movie-detail-link">View details →</a>
+            <button class="add-btn">+ Add to Watchlist</button>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="movie-card">
+          <div class="movie-poster" style="background: linear-gradient(160deg, #0a1a0a 0%, #1a3a1a 50%, #0a2a1a 100%);">
+            <div class="poster-overlay">
+              <span class="poster-icon">💊</span>
+            </div>
+            <div class="movie-rating-badge">8.7</div>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">The Matrix</h3>
+            <p class="movie-meta">1999 &middot; The Wachowskis &middot; Sci-Fi</p>
+            <a href="detail.html" class="movie-detail-link">View details →</a>
+            <button class="add-btn">+ Add to Watchlist</button>
+          </div>
+        </div>
+
+      
+        <div class="movie-card">
+          <div class="movie-poster" style="background: linear-gradient(160deg, #1a1000 0%, #3a2800 50%, #5a3a00 100%);">
+            <div class="poster-overlay">
+              <span class="poster-icon">⚔️</span>
+            </div>
+            <div class="movie-rating-badge rating-gold">9.0</div>
+          </div>
+          <div class="movie-info">
+            <h3 class="movie-title">The Godfather</h3>
+            <p class="movie-meta">1972 &middot; Francis Ford Coppola &middot; Drama</p>
+            <a href="detail.html" class="movie-detail-link">View details →</a>
+            <button class="add-btn">+ Add to Watchlist</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>MovieList &copy; 2025 &middot; Jarell Dorsey</p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

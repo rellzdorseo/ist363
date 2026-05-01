@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MovieList — Inception</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="brand">
+      <span class="brand-icon">▶</span>
+      <span class="brand-name">MovieList</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="watchlist.html" class="nav-link">Watchlist</a>
+    </div>
+  </nav>
+
+  <!-- DETAIL HERO BANNER -->
+  <div class="detail-banner" style="background: linear-gradient(120deg, #050510 0%, #0a0a2a 40%, #0f1a4a 70%, #0a2060 100%);">
+    <div class="detail-banner-overlay"></div>
+    <div class="hero-bg-text" aria-hidden="true">DREAM</div>
+  </div>
+
+  <!-- DETAIL PANEL -->
+  <section class="detail-section">
+    <div class="container">
+      <a href="index.html" class="back-link">← Back to Search</a>
+
+      <div class="detail-panel">
+
+        <!-- Poster -->
+        <div class="detail-poster-wrap">
+          <div class="detail-poster" style="background: linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+            <span class="detail-poster-icon">🎬</span>
+          </div>
+          <div class="detail-poster-glow"></div>
+        </div>
+
+        <!-- Info -->
+        <div class="detail-info">
+          <div class="detail-genres">
+            <span class="genre-tag">Sci-Fi</span>
+            <span class="genre-tag">Thriller</span>
+            <span class="genre-tag">Action</span>
+          </div>
+          <h1 class="detail-title">Inception</h1>
+          <div class="detail-meta-row">
+            <span class="detail-year">2010</span>
+            <span class="detail-dot">·</span>
+            <span class="detail-director">Christopher Nolan</span>
+            <span class="detail-dot">·</span>
+            <span class="detail-runtime">148 min</span>
+          </div>
+
+          <div class="detail-rating-row">
+            <div class="big-rating">
+              <span class="big-rating-num">8.8</span>
+              <span class="big-rating-denom">/10</span>
+            </div>
+            <div class="stars-row" aria-label="4.5 out of 5 stars">
+              ★★★★<span class="star-half">★</span>
+            </div>
+            <span class="rating-source">IMDb</span>
+          </div>
+
+          <div class="detail-divider"></div>
+
+          <h2 class="overview-label">Overview</h2>
+          <p class="detail-overview">
+            A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.
+          </p>
+
+          <div class="detail-extra">
+            <div class="extra-item">
+              <span class="extra-label">Director</span>
+              <span class="extra-val">Christopher Nolan</span>
+            </div>
+            <div class="extra-item">
+              <span class="extra-label">Cast</span>
+              <span class="extra-val">Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page</span>
+            </div>
+            <div class="extra-item">
+              <span class="extra-label">Language</span>
+              <span class="extra-val">English</span>
+            </div>
+          </div>
+
+          <div class="detail-actions">
+            <button class="add-btn add-btn-large">+ Add to Watchlist</button>
+            <a href="index.html" class="back-btn-secondary">← Back</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>MovieList &copy; 2025 &middot; Jarell Dorsey</p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MovieList — Watchlist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="brand">
+      <span class="brand-icon">▶</span>
+      <span class="brand-name">MovieList</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="watchlist.html" class="nav-link active">Watchlist</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-title">My <span class="accent">Watchlist</span></h1>
+      <p class="page-sub">3 movies saved &middot; 1 watched &middot; 2 to go</p>
+    </div>
+    <div class="hero-bg-text" aria-hidden="true">LIST</div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="container stats-inner">
+      <div class="stat">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Saved</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">1</span>
+        <span class="stat-label">Watched</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Remaining</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">8.8</span>
+        <span class="stat-label">Avg Rating</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WATCHLIST TABLE -->
+  <section class="watchlist-section">
+    <div class="container">
+
+      <div class="watchlist-table">
+        <div class="table-header">
+          <span class="col-poster"></span>
+          <span class="col-title">Title</span>
+          <span class="col-year">Year</span>
+          <span class="col-rating">Rating</span>
+          <span class="col-status">Status</span>
+          <span class="col-actions">Actions</span>
+        </div>
+
+        <!-- Row 1 — Watched -->
+        <div class="table-row watched">
+          <div class="col-poster">
+            <div class="row-poster" style="background: linear-gradient(160deg,#1a1a2e,#0f3460);">
+              <span>🎬</span>
+            </div>
+          </div>
+          <div class="col-title">
+            <a href="detail.html" class="row-title">Inception</a>
+            <span class="row-genre">Sci-Fi · Thriller</span>
+          </div>
+          <div class="col-year">2010</div>
+          <div class="col-rating">
+            <span class="rating-pill">★ 8.8</span>
+          </div>
+          <div class="col-status">
+            <span class="status-badge status-watched">Watched</span>
+          </div>
+          <div class="col-actions">
+            <button class="action-btn toggle-btn" title="Toggle status">⟳ Toggle</button>
+            <button class="action-btn remove-btn" title="Remove">✕ Remove</button>
+          </div>
+        </div>
+
+        <!-- Row 2 — Unwatched -->
+        <div class="table-row">
+          <div class="col-poster">
+            <div class="row-poster" style="background: linear-gradient(160deg,#0d0d0d,#2d1b00);">
+              <span>🌌</span>
+            </div>
+          </div>
+          <div class="col-title">
+            <a href="detail.html" class="row-title">Interstellar</a>
+            <span class="row-genre">Drama · Sci-Fi</span>
+          </div>
+          <div class="col-year">2014</div>
+          <div class="col-rating">
+            <span class="rating-pill">★ 8.6</span>
+          </div>
+          <div class="col-status">
+            <span class="status-badge status-unwatched">Unwatched</span>
+          </div>
+          <div class="col-actions">
+            <button class="action-btn toggle-btn" title="Toggle status">⟳ Toggle</button>
+            <button class="action-btn remove-btn" title="Remove">✕ Remove</button>
+          </div>
+        </div>
+
+        <!-- Row 3 — Unwatched -->
+        <div class="table-row">
+          <div class="col-poster">
+            <div class="row-poster" style="background: linear-gradient(160deg,#0a0a0a,#2a1500);">
+              <span>🦇</span>
+            </div>
+          </div>
+          <div class="col-title">
+            <a href="detail.html" class="row-title">The Dark Knight</a>
+            <span class="row-genre">Action · Crime</span>
+          </div>
+          <div class="col-year">2008</div>
+          <div class="col-rating">
+            <span class="rating-pill rating-gold">★ 9.0</span>
+          </div>
+          <div class="col-status">
+            <span class="status-badge status-unwatched">Unwatched</span>
+          </div>
+          <div class="col-actions">
+            <button class="action-btn toggle-btn" title="Toggle status">⟳ Toggle</button>
+            <button class="action-btn remove-btn" title="Remove">✕ Remove</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="watchlist-cta">
+        <a href="index.html" class="cta-link">+ Search for more movies</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>MovieList &copy; 2025 &middot; Jarell Dorsey</p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
